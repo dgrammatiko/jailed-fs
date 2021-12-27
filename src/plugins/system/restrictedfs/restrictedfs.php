@@ -41,24 +41,16 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
     // Disable all the filesystem adapters except this one
     $original = (new \ReflectionClass('\Joomla\CMS\Plugin\PluginHelper'))->getProperty('plugins');
     $original->setAccessible(true);
-    $original->setValue(
-      array_filter(
-        $original->getValue(),
-        function ($plugin) {
-          if (isset($plugin->type) && $plugin->type !== 'filesystem') return false;
-        }
-      )
-    );
+    $original->setValue(array_filter(
+      $original->getValue(),
+      function ($plugin) { if (isset($plugin->type) && $plugin->type !== 'filesystem') return false; }
+    ));
   }
 
   /**
    * Setup Providers for Jailed Adapter
-   *
-   * @param   MediaProviderEvent  $event  Event for ProviderManager
-   *
-   * @return   void
    */
-  public function onSetupProviders(MediaProviderEvent $event)
+  public function onSetupProviders(MediaProviderEvent $event): void
   {
     // Don't register this provider if we're not jailed
     if (!$this->jail) return;
@@ -67,20 +59,16 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
 
   /**
    * Returns the ID of the provider
-   *
-   * @return  string
    */
-  public function getID()
+  public function getID(): string
   {
     return $this->_name;
   }
 
   /**
    * Returns the display name of the provider
-   *
-   * @return string
    */
-  public function getDisplayName()
+  public function getDisplayName(): string
   {
     return 'Restricted FS'; //Text::_('PLG_FILESYSTEM_JAILED_DEFAULT_NAME');
   }
@@ -92,22 +80,15 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
    */
   public function getAdapters()
   {
-    $user = $this->app->getIdentity();
-    $userName = str_replace(' ', '_', $user->username);
-
+    $userName = $this->app->getIdentity()->username;
     $directoryPath = JPATH_ROOT . '/images/users/' . $userName;
-
-    if (!is_dir($directoryPath)) {
-      mkdir($directoryPath, 0777, true);
-    }
+    if (!is_dir($directoryPath)) mkdir($directoryPath, 0777, true);
 
     $adapter = new \Joomla\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter(
       $directoryPath . '/',
       $userName
     );
 
-    $name = $adapter->getAdapterName();
-
-    return [$name => $adapter];
+    return [$adapter->getAdapterName() => $adapter];
   }
 }
