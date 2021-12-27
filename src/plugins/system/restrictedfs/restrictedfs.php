@@ -39,15 +39,16 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
     if (!$this->jail) return;
 
     // Disable all the filesystem adapters except this one
-    $reflectionClass = new \ReflectionClass('\Joomla\CMS\Plugin\PluginHelper');
-    $original = $reflectionClass->getProperty('plugins');
+    $original = (new \ReflectionClass('\Joomla\CMS\Plugin\PluginHelper'))->getProperty('plugins');
     $original->setAccessible(true);
-    $cachedValue = $original->getValue();
-    $newRegistry = [];
-    foreach ($cachedValue as $plugin) {
-      if ($plugin->type !== 'filesystem') $newRegistry[] = $plugin;
-    }
-    $original->setValue($newRegistry);
+    $original->setValue(
+      array_filter(
+        $original->getValue(),
+        function ($plugin) {
+          if (isset($plugin->type) && $plugin->type !== 'filesystem') return false;
+        }
+      )
+    );
   }
 
   /**
