@@ -6,7 +6,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Installer\Adapter\PluginAdapter;
 use Joomla\CMS\Installer\InstallerScript;
 
-class plgSystemJailedInstallerScript extends InstallerScript
+class plgSystemRestrictedfsInstallerScript extends InstallerScript
 {
   public function postflight($type, PluginAdapter $parent)
   {
@@ -17,7 +17,7 @@ class plgSystemJailedInstallerScript extends InstallerScript
         ->update('#__extensions')
         ->set($db->qn('enabled') . ' = 1')
         ->where($db->qn('type') . ' = ' . $db->q('plugin'))
-        ->where($db->qn('element') . ' = ' . $db->q('jailed'))
+        ->where($db->qn('element') . ' = ' . $db->q('restrictedfs'))
         ->where($db->qn('folder') . ' = ' . $db->q('system'));
       $db->setQuery($query);
       try {

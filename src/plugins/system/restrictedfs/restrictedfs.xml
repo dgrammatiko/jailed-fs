@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="4.0" type="plugin" group="system" method="upgrade">
+  <name>Restricted File System</name>
+  <author>Dimitris Grammatikogiannis</author>
+  <creationDate>December 2021</creationDate>
+  <copyright>(C) 2021 Dimitris Grammatikogiannis</copyright>
+  <license>GNU General Public License version 2 or later;</license>
+  <authorEmail>d.grammatiko@gmail.com</authorEmail>
+  <authorUrl>dgrammatiko.dev</authorUrl>
+  <version>1.0.0</version>
+  <description>Jail users to their own folder (images/users/username).</description>
+	<namespace path="src">Joomla\Plugin\System\RestrictedFS</namespace>
+  <scriptfile>script.php</scriptfile>
+  <files>
+    <filename plugin="restrictedfs">restrictedfs.php</filename>
+    <folder>src</folder>
+  </files>
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+        <field
+          name="jail_usergroups"
+          type="usergrouplist"
+          default="2"
+          label="Jail User Groups"
+          description="Select the user groups that will be jailed."
+          multiple="true"
+          layout="joomla.form.field.list-fancy-select"
+        />
+        <!-- checksuperusergroup="1" -->
+    </fieldset>
+  </fields>
+</config>
+</extension>

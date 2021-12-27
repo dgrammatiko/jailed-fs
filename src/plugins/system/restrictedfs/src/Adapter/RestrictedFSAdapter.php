@@ -1,11 +1,14 @@
 <?php
 
 /**
+ * This is a modified version of the original file:
+ * https://github.com/joomla/joomla-cms/blob/4.0-dev/plugins/filesystem/local/src/Adapter/LocalAdapter.php
+ *
  * @copyright   (C) 2021 Dimitrios Grammatikogiannis
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\Plugin\System\Jailed\Adapter;
+namespace Joomla\Plugin\System\RestrictedFS\Adapter;
 
 \defined('_JEXEC') or die;
 
@@ -30,7 +33,7 @@ use Joomla\Component\Media\Administrator\Exception\InvalidPathException;
  *
  * @since  4.0.0
  */
-class JailedAdapter implements AdapterInterface
+class RestrictedFSAdapter implements AdapterInterface
 {
 	/**
 	 * The root path to gather file information from.
@@ -60,7 +63,8 @@ class JailedAdapter implements AdapterInterface
 	 */
 	public function __construct(string $rootPath, string $filePath)
 	{
-		if (!file_exists($rootPath)) {
+		if (!file_exists($rootPath))
+		{
 			throw new \InvalidArgumentException;
 		}
 
@@ -97,7 +101,8 @@ class JailedAdapter implements AdapterInterface
 		$basePath = $this->getLocalPath($path);
 
 		// Check if file exists
-		if (!file_exists($basePath)) {
+		if (!file_exists($basePath))
+		{
 			throw new FileNotFoundException;
 		}
 
@@ -133,12 +138,14 @@ class JailedAdapter implements AdapterInterface
 		$basePath = $this->getLocalPath($path);
 
 		// Check if file exists
-		if (!file_exists($basePath)) {
+		if (!file_exists($basePath))
+		{
 			throw new FileNotFoundException;
 		}
 
 		// Check if the path points to a file
-		if (is_file($basePath)) {
+		if (is_file($basePath))
+		{
 			return [$this->getPathInformation($basePath)];
 		}
 
@@ -146,12 +153,14 @@ class JailedAdapter implements AdapterInterface
 		$data = [];
 
 		// Read the folders
-		foreach (Folder::folders($basePath) as $folder) {
+		foreach (Folder::folders($basePath) as $folder)
+		{
 			$data[] = $this->getPathInformation(Path::clean($basePath . '/' . $folder));
 		}
 
 		// Read the files
-		foreach (Folder::files($basePath) as $file) {
+		foreach (Folder::files($basePath) as $file)
+		{
 			$data[] = $this->getPathInformation(Path::clean($basePath . '/' . $file));
 		}
 
@@ -243,7 +252,8 @@ class JailedAdapter implements AdapterInterface
 	{
 		$localPath = $this->getLocalPath($path . '/' . $name);
 
-		if (!File::exists($localPath)) {
+		if (!File::exists($localPath))
+		{
 			throw new FileNotFoundException;
 		}
 
@@ -266,21 +276,27 @@ class JailedAdapter implements AdapterInterface
 	{
 		$localPath = $this->getLocalPath($path);
 
-		if (is_file($localPath)) {
-			if (!File::exists($localPath)) {
+		if (is_file($localPath))
+		{
+			if (!File::exists($localPath))
+			{
 				throw new FileNotFoundException;
 			}
 
 			$success = File::delete($localPath);
-		} else {
-			if (!Folder::exists($localPath)) {
+		}
+		else
+		{
+			if (!Folder::exists($localPath))
+			{
 				throw new FileNotFoundException;
 			}
 
 			$success = Folder::delete($localPath);
 		}
 
-		if (!$success) {
+		if (!$success)
+		{
 			throw new \Exception('Delete not possible!');
 		}
 	}
@@ -336,16 +352,20 @@ class JailedAdapter implements AdapterInterface
 		$obj->modified_date           = $modifiedDate->format('c', true);
 		$obj->modified_date_formatted = HTMLHelper::_('date', $modifiedDate, Text::_('DATE_FORMAT_LC5'));
 
-		if (MediaHelper::isImage($obj->name)) {
+		if (MediaHelper::isImage($obj->name))
+		{
 			// Get the image properties
-			try {
+			try
+			{
 				$props       = Image::getImageFileProperties($path);
 				$obj->width  = $props->width;
 				$obj->height = $props->height;
 
 				// Todo : Change this path to an actual thumbnail path
 				$obj->thumb_path = $this->getUrl($obj->path);
-			} catch (UnparsableImageException $e) {
+			}
+			catch (UnparsableImageException $e)
+			{
 				// Ignore the exception - it's an image that we don't know how to parse right now
 			}
 		}
@@ -369,15 +389,18 @@ class JailedAdapter implements AdapterInterface
 		$timezone = Factory::getApplication()->get('offset');
 		$user     = Factory::getUser();
 
-		if ($user->id) {
+		if ($user->id)
+		{
 			$userTimezone = $user->getParam('timezone');
 
-			if (!empty($userTimezone)) {
+			if (!empty($userTimezone))
+			{
 				$timezone = $userTimezone;
 			}
 		}
 
-		if ($timezone) {
+		if ($timezone)
+		{
 			$dateObj->setTimezone(new \DateTimeZone($timezone));
 		}
 
@@ -405,7 +428,8 @@ class JailedAdapter implements AdapterInterface
 		$sourcePath      = Path::clean($this->getLocalPath($sourcePath), '/');
 		$destinationPath = Path::clean($this->getLocalPath($destinationPath), '/');
 
-		if (!file_exists($sourcePath)) {
+		if (!file_exists($sourcePath))
+		{
 			throw new FileNotFoundException;
 		}
 
@@ -413,15 +437,19 @@ class JailedAdapter implements AdapterInterface
 		$safeName = $this->getSafeName($name);
 
 		// If the safe name is different normalise the file name
-		if ($safeName != $name) {
+		if ($safeName != $name)
+		{
 			$destinationPath = substr($destinationPath, 0, -\strlen($name)) . '/' . $safeName;
 		}
 
 		// Check for existence of the file in destination
 		// if it does not exists simply copy source to destination
-		if (is_dir($sourcePath)) {
+		if (is_dir($sourcePath))
+		{
 			$this->copyFolder($sourcePath, $destinationPath, $force);
-		} else {
+		}
+		else
+		{
 			$this->copyFile($sourcePath, $destinationPath, $force);
 		}
 
@@ -445,16 +473,19 @@ class JailedAdapter implements AdapterInterface
 	 */
 	private function copyFile(string $sourcePath, string $destinationPath, bool $force = false)
 	{
-		if (is_dir($destinationPath)) {
+		if (is_dir($destinationPath))
+		{
 			// If the destination is a folder we create a file with the same name as the source
 			$destinationPath = $destinationPath . '/' . $this->getFileName($sourcePath);
 		}
 
-		if (file_exists($destinationPath) && !$force) {
+		if (file_exists($destinationPath) && !$force)
+		{
 			throw new \Exception('Copy file is not possible as destination file already exists');
 		}
 
-		if (!File::copy($sourcePath, $destinationPath)) {
+		if (!File::copy($sourcePath, $destinationPath))
+		{
 			throw new \Exception('Copy file is not possible');
 		}
 	}
@@ -473,15 +504,18 @@ class JailedAdapter implements AdapterInterface
 	 */
 	private function copyFolder(string $sourcePath, string $destinationPath, bool $force = false)
 	{
-		if (file_exists($destinationPath) && !$force) {
+		if (file_exists($destinationPath) && !$force)
+		{
 			throw new \Exception('Copy folder is not possible as destination folder already exists');
 		}
 
-		if (is_file($destinationPath) && !File::delete($destinationPath)) {
+		if (is_file($destinationPath) && !File::delete($destinationPath))
+		{
 			throw new \Exception('Copy folder is not possible as destination folder is a file and can not be deleted');
 		}
 
-		if (!Folder::copy($sourcePath, $destinationPath, '', $force)) {
+		if (!Folder::copy($sourcePath, $destinationPath, '', $force))
+		{
 			throw new \Exception('Copy folder is not possible');
 		}
 	}
@@ -507,7 +541,8 @@ class JailedAdapter implements AdapterInterface
 		$sourcePath      = Path::clean($this->getLocalPath($sourcePath), '/');
 		$destinationPath = Path::clean($this->getLocalPath($destinationPath), '/');
 
-		if (!file_exists($sourcePath)) {
+		if (!file_exists($sourcePath))
+		{
 			throw new FileNotFoundException;
 		}
 
@@ -515,18 +550,23 @@ class JailedAdapter implements AdapterInterface
 		$safeName = $this->getSafeName($name);
 
 		// If transliterating could not happen, and all characters except of the file extension are filtered out, then throw an error.
-		if ($safeName === pathinfo($sourcePath, PATHINFO_EXTENSION)) {
+		if ($safeName === pathinfo($sourcePath, PATHINFO_EXTENSION))
+		{
 			throw new \Exception(Text::_('COM_MEDIA_ERROR_MAKESAFE'));
 		}
 
 		// If the safe name is different normalise the file name
-		if ($safeName != $name) {
+		if ($safeName != $name)
+		{
 			$destinationPath = substr($destinationPath, 0, -\strlen($name)) . $safeName;
 		}
 
-		if (is_dir($sourcePath)) {
+		if (is_dir($sourcePath))
+		{
 			$this->moveFolder($sourcePath, $destinationPath, $force);
-		} else {
+		}
+		else
+		{
 			$this->moveFile($sourcePath, $destinationPath, $force);
 		}
 
@@ -550,20 +590,24 @@ class JailedAdapter implements AdapterInterface
 	 */
 	private function moveFile(string $sourcePath, string $destinationPath, bool $force = false)
 	{
-		if (is_dir($destinationPath)) {
+		if (is_dir($destinationPath))
+		{
 			// If the destination is a folder we create a file with the same name as the source
 			$destinationPath = $destinationPath . '/' . $this->getFileName($sourcePath);
 		}
 
-		if (!MediaHelper::checkFileExtension(pathinfo($destinationPath, PATHINFO_EXTENSION))) {
+		if (!MediaHelper::checkFileExtension(pathinfo($destinationPath, PATHINFO_EXTENSION)))
+		{
 			throw new \Exception('Move file is not possible as the extension is invalid');
 		}
 
-		if (file_exists($destinationPath) && !$force) {
+		if (file_exists($destinationPath) && !$force)
+		{
 			throw new \Exception('Move file is not possible as destination file already exists');
 		}
 
-		if (!File::move($sourcePath, $destinationPath)) {
+		if (!File::move($sourcePath, $destinationPath))
+		{
 			throw new \Exception('Move file is not possible');
 		}
 	}
@@ -582,18 +626,22 @@ class JailedAdapter implements AdapterInterface
 	 */
 	private function moveFolder(string $sourcePath, string $destinationPath, bool $force = false)
 	{
-		if (file_exists($destinationPath) && !$force) {
+		if (file_exists($destinationPath) && !$force)
+		{
 			throw new \Exception('Move folder is not possible as destination folder already exists');
 		}
 
-		if (is_file($destinationPath) && !File::delete($destinationPath)) {
+		if (is_file($destinationPath) && !File::delete($destinationPath))
+		{
 			throw new \Exception('Move folder is not possible as destination folder is a file and can not be deleted');
 		}
 
-		if (is_dir($destinationPath)) {
+		if (is_dir($destinationPath))
+		{
 			// We need to bypass exception thrown in JFolder when destination exists
 			// So we only copy it in forced condition, then delete the source to simulate a move
-			if (!Folder::copy($sourcePath, $destinationPath, '', true)) {
+			if (!Folder::copy($sourcePath, $destinationPath, '', true))
+			{
 				throw new \Exception('Move folder to an existing destination failed');
 			}
 
@@ -606,7 +654,8 @@ class JailedAdapter implements AdapterInterface
 		// Perform usual moves
 		$value = Folder::move($sourcePath, $destinationPath);
 
-		if ($value !== true) {
+		if ($value !== true)
+		{
 			throw new \Exception($value);
 		}
 	}
@@ -652,15 +701,19 @@ class JailedAdapter implements AdapterInterface
 	{
 		$pattern = Path::clean($this->getLocalPath($path) . '/*' . $needle . '*');
 
-		if ($recursive) {
+		if ($recursive)
+		{
 			$results = $this->rglob($pattern);
-		} else {
+		}
+		else
+		{
 			$results = glob($pattern);
 		}
 
 		$searchResults = [];
 
-		foreach ($results as $result) {
+		foreach ($results as $result)
+		{
 			$searchResults[] = $this->getPathInformation($result);
 		}
 
@@ -681,7 +734,8 @@ class JailedAdapter implements AdapterInterface
 	{
 		$files = glob($pattern, $flags);
 
-		foreach (glob(\dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
+		foreach (glob(\dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir)
+		{
 			$files = array_merge($files, $this->rglob($dir . '/' . $this->getFileName($pattern), $flags));
 		}
 
@@ -716,7 +770,8 @@ class JailedAdapter implements AdapterInterface
 	private function getSafeName(string $name): string
 	{
 		// Make the filename safe
-		if (!$name = File::makeSafe($name)) {
+		if (!$name = File::makeSafe($name))
+		{
 			throw new \Exception(Text::_('COM_MEDIA_ERROR_MAKESAFE'));
 		}
 
@@ -727,7 +782,8 @@ class JailedAdapter implements AdapterInterface
 		$extension = File::getExt($name);
 
 		// Normalise extension, always lower case
-		if ($extension) {
+		if ($extension)
+		{
 			$extension = '.' . strtolower($extension);
 		}
 
@@ -757,7 +813,8 @@ class JailedAdapter implements AdapterInterface
 		// @todo find a better way to check the input, by not writing the file to the disk
 		$tmpFile = Path::clean(\dirname($localPath) . '/' . uniqid() . '.' . File::getExt($name));
 
-		if (!File::write($tmpFile, $mediaContent)) {
+		if (!File::write($tmpFile, $mediaContent))
+		{
 			throw new \Exception(Text::_('JLIB_MEDIA_ERROR_UPLOAD_INPUT'), 500);
 		}
 
@@ -765,7 +822,8 @@ class JailedAdapter implements AdapterInterface
 
 		File::delete($tmpFile);
 
-		if (!$can) {
+		if (!$can)
+		{
 			throw new \Exception(Text::_('JLIB_MEDIA_ERROR_UPLOAD_INPUT'), 403);
 		}
 	}
@@ -805,9 +863,12 @@ class JailedAdapter implements AdapterInterface
 	 */
 	private function getLocalPath(string $path): string
 	{
-		try {
+		try
+		{
 			return Path::check($this->rootPath . '/' . $path);
-		} catch (\Exception $e) {
+		}
+		catch (\Exception $e)
+		{
 			throw new InvalidPathException($e->getMessage());
 		}
 	}

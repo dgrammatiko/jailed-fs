@@ -1,13 +1,10 @@
 <?php
-
 /**
  * @copyright   (C) 2021 Dimitrios Grammatikogiannis
  * @license     GNU General Public License version 2 or later;
  */
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Component\Media\Administrator\Event\MediaProviderEvent;
 use Joomla\Component\Media\Administrator\Provider\ProviderInterface;
@@ -15,7 +12,7 @@ use Joomla\Component\Media\Administrator\Provider\ProviderInterface;
 /**
  * Jailed FS plugin.
  */
-class PlgSystemJailed extends CMSPlugin implements ProviderInterface
+class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
 {
   /**
    * Application object.
@@ -38,23 +35,18 @@ class PlgSystemJailed extends CMSPlugin implements ProviderInterface
   {
     // Bail out early
     if ($this->app->input->get('option') !== 'com_media') return;
-    // Bail out early
-    if (!in_array((int) $this->params->get('jail_usergroups', 2), $this->app->getIdentity()->groups)) {
-      $this->jail = false;
-      return;
-    }
+    if (count(array_intersect($this->app->getIdentity()->groups, (array) $this->params->get('jail_usergroups', []))) === 0) $this->jail = false;
+    if (!$this->jail) return;
 
-    $reflectionClass = new ReflectionClass('\Joomla\CMS\Plugin\PluginHelper');
+    // Disable all the filesystem adapters except this one
+    $reflectionClass = new \ReflectionClass('\Joomla\CMS\Plugin\PluginHelper');
     $original = $reflectionClass->getProperty('plugins');
     $original->setAccessible(true);
     $cachedValue = $original->getValue();
     $newRegistry = [];
     foreach ($cachedValue as $plugin) {
-      if ($plugin->type !== 'filesystem') {
-        $newRegistry[] = $plugin;
-      }
+      if ($plugin->type !== 'filesystem') $newRegistry[] = $plugin;
     }
-
     $original->setValue($newRegistry);
   }
 
@@ -67,6 +59,7 @@ class PlgSystemJailed extends CMSPlugin implements ProviderInterface
    */
   public function onSetupProviders(MediaProviderEvent $event)
   {
+    // Don't register this provider if we're not jailed
     if (!$this->jail) return;
     $event->getProviderManager()->registerProvider($this);
   }
@@ -98,7 +91,7 @@ class PlgSystemJailed extends CMSPlugin implements ProviderInterface
    */
   public function getAdapters()
   {
-    $user = Factory::getUser();
+    $user = $this->app->getIdentity();
     $userName = str_replace(' ', '_', $user->username);
 
     $directoryPath = JPATH_ROOT . '/images/users/' . $userName;
@@ -107,7 +100,7 @@ class PlgSystemJailed extends CMSPlugin implements ProviderInterface
       mkdir($directoryPath, 0777, true);
     }
 
-    $adapter = new \Joomla\Plugin\System\Jailed\Adapter\JailedAdapter(
+    $adapter = new \Joomla\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter(
       $directoryPath . '/',
       $userName
     );
