@@ -35,7 +35,7 @@ The plugin has only one field that allows the administrator to set which groups 
 
 {% image "./site/images/setup.png", "Restricted Joomla Media Manager", "(min-width: 30em) 50vw, 100vw" %}
 
-It goes without saying that any selected User Group needs to have the permissions adjusted in the Media: Options.
+It goes without saying that any selected User Group need to have the permissions adjusted in the Media: Options.
 Eg.:
 
 {% image "./site/images/setup2.png", "Joomla Media Manager Permissions", "(min-width: 30em) 50vw, 100vw" %}

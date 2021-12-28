@@ -26,7 +26,7 @@ In pictures, the Media manager goes from accessing everything:
 
 {% image "./site/images/before.png", "Default Joomla Media Manager allowing access to everything", "(min-width: 30em) 50vw, 100vw" %}
 
-...to restricting access to a specific folder (for a given user group):
+...to restricting access to a specific folder (for the current user):
 
 {% image "./site/images/after.png", "Restricted Joomla Media Manager", "(min-width: 30em) 50vw, 100vw" %}
 
