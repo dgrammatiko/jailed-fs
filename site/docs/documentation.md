@@ -34,3 +34,8 @@ For the installation the procedure is the expected one and once the package is i
 The plugin has only one field that allows the administrator to set which groups will have access only to the restricted folder. It should be self explanatory, select the groups that users belonging to them will NOT access the full images folder but rather their own folder named as their own user name in a path like `images/users/{username}`.
 
 {% image "./site/images/setup.png", "Restricted Joomla Media Manager", "(min-width: 30em) 50vw, 100vw" %}
+
+It goes without saying that any selected User Group needs to have the permissions adjusted in the Media: Options.
+Eg.:
+
+{% image "./site/images/setup2.png", "Joomla Media Manager Permissions", "(min-width: 30em) 50vw, 100vw" %}
