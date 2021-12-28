@@ -38,7 +38,7 @@ In pictures, the Media manager goes from accessing everything:
 
 {% image "./site/images/after3.png", "Restricted Joomla Media Manager", "(min-width: 30em) 50vw, 100vw" %}
 
-{% image "./site/images/after3.png", "Restricted Joomla Media Manager", "(min-width: 30em) 50vw, 100vw" %}
+{% image "./site/images/after4.png", "Restricted Joomla Media Manager", "(min-width: 30em) 50vw, 100vw" %}
 
 ### ...and in any Form Field type `Media`:
 
