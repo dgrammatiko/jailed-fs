@@ -3,7 +3,7 @@
  * @copyright   (C) 2021 Dimitrios Grammatikogiannis
  * @license     GNU General Public License version 2 or later;
  */
-defined('_JEXEC') or die;
+defined('_JEXEC') || die;
 
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Component\Media\Administrator\Event\MediaProviderEvent;
@@ -70,7 +70,7 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
    */
   public function getDisplayName(): string
   {
-    return 'Restricted FS'; //Text::_('PLG_FILESYSTEM_JAILED_DEFAULT_NAME');
+    return 'Restricted FS';
   }
 
   /**

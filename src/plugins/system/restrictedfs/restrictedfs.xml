@@ -31,4 +31,7 @@
     </fieldset>
   </fields>
 </config>
+<updateservers>
+  <server type="extension" priority="1" name="Restricted File System">https://restrictedfs.dgrammatiko.dev/update.xml</server>
+</updateservers>
 </extension>

@@ -1,6 +1,9 @@
-
 <?php
-defined('_JEXEC') || die('Restricted access');
+/**
+ * @copyright   (C) 2021 Dimitrios Grammatikogiannis
+ * @license     GNU General Public License version 2 or later;
+ */
+defined('_JEXEC') || die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Installer\Adapter\PluginAdapter;

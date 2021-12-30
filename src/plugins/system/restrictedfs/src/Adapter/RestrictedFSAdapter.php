@@ -8,7 +8,7 @@
 
 namespace Joomla\Plugin\System\RestrictedFS\Adapter;
 
-\defined('_JEXEC') or die;
+\defined('_JEXEC') || die;
 
 use Joomla\CMS\Uri\Uri;
 use Joomla\Plugin\Filesystem\Local\Adapter\LocalAdapter;
