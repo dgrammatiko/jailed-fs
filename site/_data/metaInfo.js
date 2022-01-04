@@ -1,7 +1,7 @@
 
 const pakage = require('../../package.json');
 
-module.exports = () => {
+module.exports = async () => {
   return {
     url: 'https://restrictedfs.dgrammatiko.dev',
     repo: pakage.data.repo,

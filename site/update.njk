@@ -5,16 +5,16 @@ permalink: /update.xml
 <updates>
   <update>
     <name>Restricted File System</name>
-    <version>{{metainfo.version}}</version>
-    <infourl title="Restricted File System"><![CDATA[{{metainfo.url}}]]></infourl>
+    <version>{{metaInfo.version}}</version>
+    <infourl title="Restricted File System"><![CDATA[{{metaInfo.url}}]]></infourl>
     <downloads>
-      <downloadurl type="full" format="zip"><![CDATA[{{metainfo.url}}/dist/plg_system_restrictedfs_{{metainfo.version}}.zip]]></downloadurl>
+      <downloadurl type="full" format="zip"><![CDATA[{{metaInfo.url}}/dist/plg_system_restrictedfs_{{metaInfo.version}}.zip]]></downloadurl>
     </downloads>
-    <targetplatform name="joomla" version="4.[123456789]"/>
+    <targetplatform name="joomla" version="4"/>
     <element>restrictedfs</element>
     <type>package</type>
-    <sha256>{{metainfo.sha256}}</sha256>
-		<sha384>{{metainfo.sha384}}</sha384>
-		<sha512>{{metainfo.sha512}}</sha512>
+    {% if metaInfo.sha256 %}<sha256>{{metaInfo.sha256}}</sha256>{% endif %}
+		{% if metaInfo.sha384 %}<sha384>{{metaInfo.sha384}}</sha384>{% endif %}
+		{% if metaInfo.sha512 %}<sha512>{{metaInfo.sha512}}</sha512>{% endif %}
   </update>
 </updates>

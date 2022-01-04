@@ -16,7 +16,7 @@ description: Restricted FS for Joomla\'s v4+ Media Manager
 ### Latest Version
 {% assign fff = downloads | first%}
 
-Download the latest version: [{{fff.version}}]({{ metainfo.url }}/dist/{{fff.name}})
+Download the latest version: [{{fff.version}}]({{ metaInfo.url }}/dist/{{fff.name}})
 
 ### What it does
 
