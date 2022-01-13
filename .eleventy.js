@@ -1,6 +1,6 @@
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
-let Nunjucks = require('nunjucks');
+// let Nunjucks = require('nunjucks');
 const anchor = require("markdown-it-anchor");
 // const htmlmin = require("html-minifier");
 // const codepenIt = require("11ty-to-codepen");
@@ -30,7 +30,7 @@ async function imageShortcode(src, alt, sizes) {
 // );
 
 module.exports = function (eleventyConfig) {
-  let liquidJs = require("liquidjs");
+  let { Liquid } = require('liquidjs');
   let options = {
     extname: ".liquid",
     dynamicPartials: true,
@@ -38,7 +38,7 @@ module.exports = function (eleventyConfig) {
     root: ["site/_includes"]
   };
 
-  eleventyConfig.setLibrary("liquid", liquidJs(options));
+  eleventyConfig.setLibrary("liquid", new Liquid(options));
   // eleventyConfig.setLibrary('njk', nunjucksEnvironment);
   eleventyConfig.setDataDeepMerge(true);
   eleventyConfig.addPassthroughCopy({ "site/images": "images" });

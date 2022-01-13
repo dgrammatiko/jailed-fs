@@ -88,6 +88,4 @@ const zipExtension = async (path, name, type) => {
 
   // zip.writeZip(`site/dist/pkg_wysiwygtinymce_${version}.zip`);
 })();
-(async () => {
 
-})();

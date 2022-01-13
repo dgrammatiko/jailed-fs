@@ -9,7 +9,7 @@ const getSortedFiles = async (dir) => {
     .map(fileName => ({
       name: fileName,
       time: fs.statSync(`${dir}/${fileName}`).mtime.getTime(),
-      version: fileName.replace('plg_system_ttctinymce_', '').replace('.zip', '')
+      version: fileName.replace('plg_system_restrictedfs_', '').replace('.zip', '')
     }))
     .filter(x => extname(x.name) === '.zip')
     // .sort((a, b) => a.time - b.time)
