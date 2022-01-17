@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="4.0" type="plugin" group="system" method="upgrade">
-  <name>Restricted File System</name>
+  <name>System - Restricted FS</name>
   <author>Dimitris Grammatikogiannis</author>
   <creationDate>December 2021</creationDate>
   <copyright>(C) 2021 Dimitris Grammatikogiannis</copyright>
