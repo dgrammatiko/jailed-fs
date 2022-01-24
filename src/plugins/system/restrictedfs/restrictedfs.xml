@@ -7,7 +7,7 @@
   <license>GNU General Public License version 2 or later;</license>
   <authorEmail>d.grammatiko@gmail.com</authorEmail>
   <authorUrl>dgrammatiko.dev</authorUrl>
-  <version>1.0.0</version>
+  <version>{{version}}</version>
   <description>Jail users to their own folder (images/users/username).</description>
 	<namespace path="src">Joomla\Plugin\System\RestrictedFS</namespace>
   <scriptfile>script.php</scriptfile>
