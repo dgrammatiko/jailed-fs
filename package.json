@@ -1,6 +1,6 @@
 {
   "name": "plugin-restricted-fs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "A tiny Joomla 4.0+ plugin that jails the filesystem to a restricted directory",
   "scripts": {
