@@ -123,7 +123,7 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
   public function getAdapters()
   {
     $userName = $this->app->getIdentity()->username;
-    $directoryPath = JPATH_ROOT . '/images/users/' . $userName;
+    $directoryPath = JPATH_ROOT . '/images/users/' . md5($userName);
     if (!is_dir($directoryPath)) mkdir($directoryPath, 0777, true);
 
     $adapter = new \Joomla\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter(
