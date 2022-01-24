@@ -20,7 +20,7 @@ Download the latest version: [{{fff.version}}]({{ metaInfo.url }}/dist/{{fff.nam
 
 ### What it does
 
-Introduces a restricted access to a specific part of the images folder (`images/user/userName`, where `userName` is the actual user name). The plugin could be enabled per user group. The code is tiny, extremelly efficient and doesn't require any configuration other than selecting the user groups that will act upon. Also no nasty hacks or monkey patched code. It's a proper solution that doesn't need a total replacement of the Media Manager...
+Introduces a restricted access to a specific part of the images folder (`images/user/userName`, where `userName` is the hashed version of the user name). The plugin could be enabled per user group. The code is tiny, extremelly efficient and doesn't require any configuration other than selecting the user groups that will act upon. Also no nasty hacks or monkey patched code. It's a proper solution that doesn't need a total replacement of the Media Manager...
 
 In pictures, the Media manager goes from accessing everything:
 
