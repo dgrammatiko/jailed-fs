@@ -1,6 +1,6 @@
 {
   "name": "plugin-restricted-fs",
-  "version": "1.1.0",
+  "version": "1.0.1",
   "private": true,
   "description": "A tiny Joomla 4.0+ plugin that jails the filesystem to a restricted directory",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/ttc-freebies/plugin-responsive-images#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy": "^2.0.0-canary.4",
     "@11ty/eleventy-img": "^1.0.0",
     "@11ty/eleventy-navigation": "^0.3.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.3",
