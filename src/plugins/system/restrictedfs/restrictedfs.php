@@ -87,11 +87,12 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
       return;
     }
 
+    $userName = $this->app->getIdentity()->username;
     $tinyMCE = new stdClass;
     $tinyMCE->tinyMCE = [];
     $tinyMCE->tinyMCE['default'] = $options['default'];
     if (isset($options['default']['comMediaAdapter'])) {
-      $options['default']['comMediaAdapter'] = 'restrictedfs-' . $this->app->getIdentity()->username . ':';
+      $options['default']['comMediaAdapter'] = 'restrictedfs-' . ($this->masked ? md5($userName) : $userName) . ':';
       $options['default']['parentUploadFolder'] = '';
     }
 
