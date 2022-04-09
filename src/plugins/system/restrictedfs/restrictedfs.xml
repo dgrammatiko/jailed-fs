@@ -28,6 +28,18 @@
           layout="joomla.form.field.list-fancy-select"
         />
         <!-- checksuperusergroup="1" -->
+        <field
+          name="mask_usernames"
+          type="radio"
+          label="Mask User Names"
+          description="If checked, the user names will be masked. Changing this setting breaks existing URLs!"
+          default="0"
+          layout="joomla.form.field.radio.switcher"
+          filter="integer"
+          >
+          <option value="0">JNO</option>
+          <option value="1">JYES</option>
+        </field>
     </fieldset>
   </fields>
 </config>

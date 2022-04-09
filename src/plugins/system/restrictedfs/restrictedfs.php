@@ -29,6 +29,20 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
   protected $jail = true;
 
   /**
+   * Should the username be masked?
+   *
+   * @var  boolean
+   */
+  protected $masked = false;
+
+  public function __construct(&$subject, $config = array())
+  {
+    parent::__construct($subject, $config);
+
+    $this->masked = (bool) $this->params->get('mask_usernames', 0);
+  }
+
+  /**
    * @return  void
    */
   public function onAfterRoute(): void
@@ -73,11 +87,12 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
       return;
     }
 
+    $userName = $this->app->getIdentity()->username;
     $tinyMCE = new stdClass;
     $tinyMCE->tinyMCE = [];
     $tinyMCE->tinyMCE['default'] = $options['default'];
     if (isset($options['default']['comMediaAdapter'])) {
-      $options['default']['comMediaAdapter'] = 'restrictedfs-' . $this->app->getIdentity()->username . ':';
+      $options['default']['comMediaAdapter'] = 'restrictedfs-' . ($this->masked ? md5($userName) : $userName) . ':';
       $options['default']['parentUploadFolder'] = '';
     }
 
@@ -123,12 +138,12 @@ class PlgSystemRestrictedfs extends CMSPlugin implements ProviderInterface
   public function getAdapters()
   {
     $userName = $this->app->getIdentity()->username;
-    $directoryPath = JPATH_ROOT . '/images/users/' . $userName;
+    $directoryPath = JPATH_ROOT . '/images/users/' . ($this->masked ? md5($userName) : $userName);
     if (!is_dir($directoryPath)) mkdir($directoryPath, 0777, true);
 
     $adapter = new \Joomla\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter(
       $directoryPath . '/',
-      $userName
+      ($this->masked ? md5($userName) : $userName)
     );
 
     return [$adapter->getAdapterName() => $adapter];
