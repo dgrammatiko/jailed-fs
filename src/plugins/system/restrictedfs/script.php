@@ -11,6 +11,16 @@ use Joomla\CMS\Installer\InstallerScript;
 
 class plgSystemRestrictedfsInstallerScript extends InstallerScript
 {
+  protected $deleteFiles = [
+    '/plugins/system/restrictedfs/restrictedfs.php',
+  ];
+  protected $deleteFolders = [];
+
+  public function update(PluginAdapter $parent)
+  {
+    $this->removeFiles();
+  }
+
   public function postflight($type, PluginAdapter $parent)
   {
     // Enable the plugin
