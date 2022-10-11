@@ -12,7 +12,8 @@
 	<namespace path="src">Joomla\Plugin\System\RestrictedFS</namespace>
   <scriptfile>script.php</scriptfile>
   <files>
-    <filename plugin="restrictedfs">restrictedfs.php</filename>
+    <filename plugin="restrictedfs">license.txt</filename>
+    <folder>services</folder>
     <folder>src</folder>
   </files>
   <config>
