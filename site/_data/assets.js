@@ -1,7 +1,7 @@
 const { readFile } = require('fs').promises;
 const rollup = require('rollup');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
-const { terser } = require("rollup-plugin-terser");
+const terser = require("@rollup/plugin-terser");
 const template = require("rollup-plugin-html-literals");
 const { existsSync, mkdirSync } = require('fs');
 const postcss  = require('postcss')
