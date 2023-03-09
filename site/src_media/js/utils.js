@@ -16,7 +16,7 @@ const downloadBlob = (blob, name = 'file.txt') => {
 }
 
 const generateZip = async (elClass) => {
-  const {configure, BlobReader, BlobWriter, ZipReader, ZipWriter} = await import('@zip.js/zip.js/lib/zip.js');
+  const {configure, BlobReader, BlobWriter, ZipReader, ZipWriter} = await import('@zip.js/zip.js');
 
   configure({
     workerScriptsPath: '/js/',
