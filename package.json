@@ -4,6 +4,7 @@
   "private": true,
   "description": "A tiny Joomla 4.0+ plugin that jails the filesystem to a restricted directory",
   "scripts": {
+    "test": "eleventy",
     "build": "node build.js",
     "build:site": "eleventy",
     "serve": "eleventy --serve"
