@@ -39,7 +39,7 @@
     "rollup": "3.25.1",
     "rollup-plugin-html-literals": "1.1.6",
     "semver": "7.5.2",
-    "uhtml": "3.1.0"
+    "uhtml": "3.2.1"
   },
   "data": {
     "repo": "ooo",
