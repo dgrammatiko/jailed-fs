@@ -11,7 +11,7 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use Joomla\Event\DispatcherInterface;
-use Joomla\Plugin\System\RestrictedFS\Extension\RestrictedFS;
+use Dgrammatiko\Plugin\System\RestrictedFS\Extension\RestrictedFS;
 
 return new class implements ServiceProviderInterface
 {

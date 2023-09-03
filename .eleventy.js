@@ -42,7 +42,8 @@ module.exports = function (eleventyConfig) {
   // eleventyConfig.setLibrary('njk', nunjucksEnvironment);
   eleventyConfig.setDataDeepMerge(true);
   eleventyConfig.addPassthroughCopy({ "site/images": "images" });
-  eleventyConfig.addPassthroughCopy({ "site/dist": "dist" });
+  // eleventyConfig.addPassthroughCopy({ "site/dist": "dist" });
+  eleventyConfig.addPassthroughCopy({ "packages": "dist" });
 
   eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
   eleventyConfig.addLiquidShortcode("image", imageShortcode);

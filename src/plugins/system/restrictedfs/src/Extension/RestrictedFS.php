@@ -5,7 +5,7 @@
  * @license     GNU General Public License version 2 or later;
  */
 
-namespace Joomla\Plugin\System\RestrictedFS\Extension;
+namespace Dgrammatiko\Plugin\System\RestrictedFS\Extension;
 
 defined('_JEXEC') || die;
 
@@ -33,7 +33,7 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
    */
   protected $masked = false;
 
-  public function __construct(&$subject, $config = array())
+  public function __construct(&$subject, $config = [])
   {
     parent::__construct($subject, $config);
 
@@ -61,7 +61,10 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
   {
     // Bail out early
     if ($this->getApplication()->input->get('option') !== 'com_media') return;
-    if (count(array_intersect($this->getApplication()->getIdentity()->groups, (array) $this->params->get('jail_usergroups', []))) === 0) $this->jail = false;
+    $PluginUserGroups = (array) $this->params->get('jail_usergroups', []);
+    $userGroups       = $this->getApplication()->getIdentity()->groups;
+
+    if (count(array_intersect($userGroups, $PluginUserGroups)) === 0) $this->jail = false;
     if (!$this->jail) return;
 
     // Disable all the filesystem adapters except this one
@@ -82,7 +85,8 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
    */
   public function beforeCompileHead(): void
   {
-    $doc = $this->getApplication()->getDocument();
+    $app = $this->getApplication();
+    $doc = $app->getDocument();
 
     if ($doc->getType() !== 'html') return;
 
@@ -90,13 +94,13 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
     if (
       !isset($data['scriptOptions']['plg_editor_tinymce'])
       || !isset($data['scriptOptions']['plg_editor_tinymce']['tinyMCE'])
-      || count(array_intersect($this->getApplication()->getIdentity()->groups, (array) $this->params->get('jail_usergroups', []))) === 0
+      || count(array_intersect($app->getIdentity()->groups, (array) $this->params->get('jail_usergroups', []))) === 0
     ) return;
 
     $options = $data['scriptOptions']['plg_editor_tinymce']['tinyMCE'];
     if (!is_array($options) || count($options) === 0 || !isset($options['default'])) return;
 
-    $userName = $this->getApplication()->getIdentity()->username;
+    $userName = $app->getIdentity()->username;
     $tinyMCE = (object) ['tinyMCE' => ['default' => $options['default']]];
     if (isset($options['default']['comMediaAdapter'])) {
       $options['default']['comMediaAdapter'] = 'restrictedfs-' . ($this->masked ? md5($userName) : $userName) . ':';
@@ -118,6 +122,17 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
   {
     // Don't register this provider if we're not jailed
     if (!$this->jail) return;
+
+    // Disable all the filesystem adapters except this one
+    $original = (new \ReflectionClass('\Joomla\CMS\Plugin\PluginHelper'))->getProperty('plugins');
+    $original->setAccessible(true);
+    $original->setValue(array_filter(
+      $original->getValue(),
+      function ($plugin) {
+        if (isset($plugin->type) && $plugin->type !== 'filesystem') return false;
+      }
+    ));
+
     $event->getProviderManager()->registerProvider($this);
   }
 
@@ -144,14 +159,13 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
    */
   public function getAdapters()
   {
-    $userName = $this->getApplication()->getIdentity()->username;
-    $directoryPath = JPATH_ROOT . '/images/users/' . ($this->masked ? md5($userName) : $userName);
+    $userName      = $this->getApplication()->getIdentity()->username;
+    $storagePath   = $this->params->get('storage_path', 'images');
+    $directoryPath = JPATH_ROOT . '/' . $storagePath . '/users/' . ($this->masked ? md5($userName) : $userName);
+
     if (!is_dir($directoryPath)) mkdir($directoryPath, 0755, true);
 
-    $adapter = new \Joomla\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter(
-      $directoryPath . '/',
-      ($this->masked ? md5($userName) : $userName)
-    );
+    $adapter = new \Dgrammatiko\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter($directoryPath . '/', ($this->masked ? md5($userName) : $userName), $storagePath, $this->params->get('thumbs', false));
 
     return [$adapter->getAdapterName() => $adapter];
   }
