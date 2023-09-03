@@ -32,16 +32,14 @@
     "@11ty/eleventy-img": "3.1.0",
     "@11ty/eleventy-navigation": "0.3.5",
     "@11ty/eleventy-plugin-syntaxhighlight": "5.0.0",
+    "@dgrammatiko/joomla-tools": "^0.0.59",
     "@rollup/plugin-node-resolve": "15.2.1",
     "@rollup/plugin-terser": "^0.4.0",
     "markdown-it-anchor": "8.6.7",
     "naf-css": "3.0.3",
-    "semver": "7.5.4",
-    "@dgrammatiko/joomla-tools": "^0.0.59",
     "postcss-import": "^15.1.0",
-    "rollup-plugin-html-literals": "^1.1.6"
-  },
-  "dependencies": {
+    "rollup-plugin-html-literals": "^1.1.6",
+    "semver": "7.5.4"
   },
   "joomla-extensions": {
     "components": [],
