@@ -103,7 +103,7 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
     $userName = $app->getIdentity()->username;
     $tinyMCE = (object) ['tinyMCE' => ['default' => $options['default']]];
     if (isset($options['default']['comMediaAdapter'])) {
-      $options['default']['comMediaAdapter'] = 'restrictedfs-' . ($this->masked ? md5($userName) : $userName) . ':';
+      $options['default']['comMediaAdapter'] = 'restrictedfs-' . ($this->masked ? md5($userName) : str_replace('@', '_', $userName)) . ':';
       $options['default']['parentUploadFolder'] = '';
     }
 
@@ -121,19 +121,9 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
   public function setupProviders(MediaProviderEvent $event): void
   {
     // Don't register this provider if we're not jailed
-    if (!$this->jail) return;
-
-    // Disable all the filesystem adapters except this one
-    $original = (new \ReflectionClass('\Joomla\CMS\Plugin\PluginHelper'))->getProperty('plugins');
-    $original->setAccessible(true);
-    $original->setValue(array_filter(
-      $original->getValue(),
-      function ($plugin) {
-        if (isset($plugin->type) && $plugin->type !== 'filesystem') return false;
-      }
-    ));
-
-    $event->getProviderManager()->registerProvider($this);
+    if ($this->jail) {
+      $event->getProviderManager()->registerProvider($this);
+    }
   }
 
   /**
@@ -161,11 +151,11 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
   {
     $userName      = $this->getApplication()->getIdentity()->username;
     $storagePath   = $this->params->get('storage_path', 'images');
-    $directoryPath = JPATH_ROOT . '/' . $storagePath . '/users/' . ($this->masked ? md5($userName) : $userName);
+    $directoryPath = JPATH_ROOT . '/' . $storagePath . '/users/' . ($this->masked ? md5($userName) : str_replace('@', '_', $userName));
 
     if (!is_dir($directoryPath)) mkdir($directoryPath, 0755, true);
 
-    $adapter = new \Dgrammatiko\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter($directoryPath . '/', ($this->masked ? md5($userName) : $userName), $storagePath, $this->params->get('thumbs', false));
+    $adapter = new \Dgrammatiko\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter($directoryPath . '/', ($this->masked ? md5($userName) : str_replace('@', '_', $userName)), $storagePath, $this->params->get('thumbs', false));
 
     return [$adapter->getAdapterName() => $adapter];
   }

@@ -36,12 +36,12 @@
     "@rollup/plugin-terser": "^0.4.0",
     "markdown-it-anchor": "8.6.7",
     "naf-css": "3.0.3",
-    "semver": "7.5.4"
-  },
-  "dependencies": {
+    "semver": "7.5.4",
     "@dgrammatiko/joomla-tools": "^0.0.59",
     "postcss-import": "^15.1.0",
     "rollup-plugin-html-literals": "^1.1.6"
+  },
+  "dependencies": {
   },
   "joomla-extensions": {
     "components": [],
@@ -72,7 +72,7 @@
       "system": [
         {
           "name": "restrictedfs",
-          "version": "1.3.0-alpha"
+          "version": "1.3.0"
         }
       ],
       "task": [],
