@@ -9,27 +9,27 @@ const postcss  = require('postcss')
 
 module.exports = async () => {
     // eslint-disable-next-line no-console
-  console.log('Building js..');
+  // console.log('Building js..');
 
-  try {
-    const bundle = await rollup.rollup({
-        input: `${process.cwd()}/site/src_media/js/downloader.js`,
-        plugins: [
-          template(),
-          nodeResolve(),
-          terser()
-        ]
-      });
+  // try {
+  //   const bundle = await rollup.rollup({
+  //       input: `${process.cwd()}/site/src_media/js/downloader.js`,
+  //       plugins: [
+  //         template(),
+  //         nodeResolve(),
+  //         terser()
+  //       ]
+  //     });
 
-    await bundle.write({
-        format: 'es',
-        sourcemap: false,
-        dir: `${process.cwd()}/_site/js`,
-        chunkFileNames: '[name].[hash].js',
-      });
+  //   await bundle.write({
+  //       format: 'es',
+  //       sourcemap: false,
+  //       dir: `${process.cwd()}/_site/js`,
+  //       chunkFileNames: '[name].[hash].js',
+  //     });
 
-    // closes the bundle
-    await bundle.close();
+  //   // closes the bundle
+  //   await bundle.close();
 
     // if (!existsSync(`${process.cwd()}/site/css`)) {
     //   mkdirSync(`${process.cwd()}/site/css`, {recursive: true});
@@ -45,10 +45,10 @@ module.exports = async () => {
     if (result) {
       return result;
     }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-    process.exit(1);
-  }
+  // } catch (error) {
+  //   // eslint-disable-next-line no-console
+  //   console.error(error);
+  //   process.exit(1);
+  // }
   return '';
 }

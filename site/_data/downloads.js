@@ -20,5 +20,5 @@ const getSortedFiles = async (dir) => {
 };
 
 module.exports = async () => {
-  return await getSortedFiles(`${process.cwd()}/site/dist`);
+  return await getSortedFiles(`${process.cwd()}/packages`);
 }
