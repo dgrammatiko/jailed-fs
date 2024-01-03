@@ -37,7 +37,7 @@
     "@rollup/plugin-terser": "^0.4.0",
     "markdown-it-anchor": "8.6.7",
     "naf-css": "3.0.3",
-    "postcss-import": "^15.1.0",
+    "postcss-import": "^16.0.0",
     "rollup-plugin-html-literals": "^1.1.6",
     "semver": "7.5.4"
   },
