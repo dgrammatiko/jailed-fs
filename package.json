@@ -39,7 +39,7 @@
     "naf-css": "3.0.3",
     "postcss-import": "^16.0.0",
     "rollup-plugin-html-literals": "^1.1.6",
-    "semver": "7.5.4"
+    "semver": "7.6.0"
   },
   "joomla-extensions": {
     "components": [],
