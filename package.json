@@ -29,7 +29,7 @@
   "homepage": "https://github.com/ttc-freebies/plugin-responsive-images#readme",
   "devDependencies": {
     "@11ty/eleventy": "2.0.1",
-    "@11ty/eleventy-img": "4.0.0",
+    "@11ty/eleventy-img": "4.0.1",
     "@11ty/eleventy-navigation": "0.3.5",
     "@11ty/eleventy-plugin-syntaxhighlight": "5.0.0",
     "@dgrammatiko/joomla-tools": "^0.0.191",
