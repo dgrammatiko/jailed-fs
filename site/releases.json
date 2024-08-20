@@ -72,5 +72,19 @@
     "features": [],
     "changes": [],
     "notes": []
+  },
+  ,
+  {
+    "version": "1.3.2",
+    "type": "stable",
+    "joomlaVer": "4",
+    "client": "site",
+    "phpMin": "7.4",
+    "bugs": [
+      "Fix for PHP8.3"
+    ],
+    "features": [],
+    "changes": [],
+    "notes": []
   }
 ]
