@@ -9,10 +9,10 @@ namespace Dgrammatiko\Plugin\System\RestrictedFS\Extension;
 
 defined('_JEXEC') || die;
 
-use Joomla\Event\SubscriberInterface;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Component\Media\Administrator\Event\MediaProviderEvent;
 use Joomla\Component\Media\Administrator\Provider\ProviderInterface;
+use Joomla\Event\SubscriberInterface;
 
 /**
  * Jailed FS plugin.
@@ -100,10 +100,15 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
     $options = $data['scriptOptions']['plg_editor_tinymce']['tinyMCE'];
     if (!is_array($options) || count($options) === 0 || !isset($options['default'])) return;
 
-    $userName = $app->getIdentity()->username;
+    $user = $this->getApplication()->getIdentity();
+    if ($this->masked) {
+      $userName = md5($user->username);
+    } else {
+      $userName = urlencode(str_replace(['@', '.', '\\', '/', '*', '?', '<', '>'], ['_', '-', '_', '_', '_', '_', '_', '_'], $user->username));
+    }
     $tinyMCE = (object) ['tinyMCE' => ['default' => $options['default']]];
     if (isset($options['default']['comMediaAdapter'])) {
-      $options['default']['comMediaAdapter'] = 'restrictedfs-' . ($this->masked ? md5($userName) : str_replace('@', '_', $userName)) . ':';
+      $options['default']['comMediaAdapter'] = 'restrictedfs-' . $userName . ':';
       $options['default']['parentUploadFolder'] = '';
     }
 
@@ -149,13 +154,19 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
    */
   public function getAdapters()
   {
-    $userName      = $this->getApplication()->getIdentity()->username;
+    $user          = $this->getApplication()->getIdentity();
     $storagePath   = $this->params->get('storage_path', 'images');
-    $directoryPath = JPATH_ROOT . '/' . $storagePath . '/users/' . ($this->masked ? md5($userName) : str_replace('@', '_', $userName));
+    if ($this->masked) {
+      $userName = md5($user->username);
+    } else {
+      $userName = urlencode(str_replace(['@', '.', '\\', '/', '*', '?', '<', '>'], ['_', '-', '_', '_', '_', '_', '_', '_'], $user->username));
+    }
+
+    $directoryPath = JPATH_ROOT . '/' . $storagePath . '/users/' . $userName;
 
     if (!is_dir($directoryPath)) mkdir($directoryPath, 0755, true);
 
-    $adapter = new \Dgrammatiko\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter($directoryPath . '/', ($this->masked ? md5($userName) : str_replace('@', '_', $userName)), $storagePath, $this->params->get('thumbs', false));
+    $adapter = new \Dgrammatiko\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter($directoryPath . '/', $userName, $storagePath, $this->params->get('thumbs', false));
 
     return [$adapter->getAdapterName() => $adapter];
   }

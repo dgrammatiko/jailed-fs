@@ -73,7 +73,6 @@
     "changes": [],
     "notes": []
   },
-  ,
   {
     "version": "1.3.2",
     "type": "stable",
@@ -81,7 +80,8 @@
     "client": "site",
     "phpMin": "7.4",
     "bugs": [
-      "Fix for PHP8.3"
+      "Fix for PHP8.3",
+      "Stricter usernames"
     ],
     "features": [],
     "changes": [],
