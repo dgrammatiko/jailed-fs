@@ -12,7 +12,6 @@ permalink: /update.xml
     <downloads>
     <downloadurl type="full" format="zip">{{metaInfo.url}}/dist/plg_system_restrictedfs_v{{curItem.version}}.zip</downloadurl>
     </downloads>
-    <targetplatform name="joomla" version="4"/>
     <tags><tag>{{curItem.type}}</tag></tags>
     <targetplatform name="joomla" version="{{curItem.joomlaVer}}"/>
     <sha512>{{curItem.sha512}}</sha512>
