@@ -70,7 +70,7 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
     // Disable all the filesystem adapters except this one
     $original = (new \ReflectionClass('\Joomla\CMS\Plugin\PluginHelper'))->getProperty('plugins');
     $original->setAccessible(true);
-    $original->setValue(array_filter(
+    $original->setValue(null, array_filter(
       $original->getValue(),
       function ($plugin) {
         if (isset($plugin->type) && $plugin->type !== 'filesystem') return false;
