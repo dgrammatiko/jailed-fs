@@ -83,5 +83,8 @@
       "site": []
     }
   },
-  "joomlaVersion": "5.1.2"
+  "joomlaVersion": "5.1.2",
+  "dependencies": {
+    "@quentinadam/zip": "npm:@jsr/quentinadam__zip@^0.1.0"
+  }
 }
