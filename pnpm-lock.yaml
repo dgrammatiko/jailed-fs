@@ -25,8 +25,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       '@dgrammatiko/joomla-tools':
-        specifier: ^0.0.391
-        version: 0.0.391(@babel/core@7.25.2)(typescript@4.9.5)
+        specifier: ^0.0.392
+        version: 0.0.392(@babel/core@7.25.2)(typescript@4.9.5)
       '@rollup/plugin-node-resolve':
         specifier: 15.3.0
         version: 15.3.0(rollup@4.24.0)
@@ -106,10 +106,6 @@ packages:
 
   '@babel/code-frame@7.25.7':
     resolution: {integrity: sha512-0xZJFNE5XMpENsgfHYTw8FbX4kv53mFLn2i3XPoq69LyhYSCBJtitaHx9QnsVTrsogI4Z3+HtEfZ2/GFPOtf5g==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/compat-data@7.25.7':
-    resolution: {integrity: sha512-9ickoLz+hcXCeh7jrcin+/SLWm+GkxE2kTvoYyp38p4WkdFXfQJxDFGWp/YHjiKLPx06z2A7W8XKuqbReXDzsw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/compat-data@7.25.8':
@@ -868,8 +864,8 @@ packages:
     peerDependencies:
       postcss: ^8.4
 
-  '@dgrammatiko/joomla-tools@0.0.391':
-    resolution: {integrity: sha512-1EqYzNS9m1hMXLZv80hAxC1SFLW4CgqCUkkAxi/mCfufpJkmw1/HEdHYdkrRRAezEYrvOFdHtcWMNc/A7ZyhAw==}
+  '@dgrammatiko/joomla-tools@0.0.392':
+    resolution: {integrity: sha512-tXFyslpVocUWfCPhcemuJRmsZ9J9alnDpbCBdv1vIotBqSPphg9btxpglXAyy22HZNGsGR1BDAKTm7/iR+nrUA==}
     hasBin: true
 
   '@emnapi/runtime@1.2.0':
@@ -4078,8 +4074,6 @@ snapshots:
       '@babel/highlight': 7.25.7
       picocolors: 1.1.0
 
-  '@babel/compat-data@7.25.7': {}
-
   '@babel/compat-data@7.25.8': {}
 
   '@babel/core@7.25.2':
@@ -4997,7 +4991,7 @@ snapshots:
     dependencies:
       postcss: 8.4.47
 
-  '@dgrammatiko/joomla-tools@0.0.391(@babel/core@7.25.2)(typescript@4.9.5)':
+  '@dgrammatiko/joomla-tools@0.0.392(@babel/core@7.25.2)(typescript@4.9.5)':
     dependencies:
       '@babel/plugin-transform-runtime': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-env': 7.25.8(@babel/core@7.25.2)
@@ -5525,7 +5519,7 @@ snapshots:
 
   babel-plugin-polyfill-corejs2@0.4.11(@babel/core@7.25.2):
     dependencies:
-      '@babel/compat-data': 7.25.7
+      '@babel/compat-data': 7.25.8
       '@babel/core': 7.25.2
       '@babel/helper-define-polyfill-provider': 0.6.2(@babel/core@7.25.2)
       semver: 6.3.1
