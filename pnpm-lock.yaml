@@ -25,8 +25,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       '@dgrammatiko/joomla-tools':
-        specifier: ^0.0.409
-        version: 0.0.409(@babel/core@7.25.2)(typescript@4.9.5)
+        specifier: ^0.0.410
+        version: 0.0.410(@babel/core@7.25.2)(typescript@4.9.5)
       '@rollup/plugin-node-resolve':
         specifier: 15.3.0
         version: 15.3.0(rollup@4.24.2)
@@ -866,8 +866,8 @@ packages:
     peerDependencies:
       postcss: ^8.4
 
-  '@dgrammatiko/joomla-tools@0.0.409':
-    resolution: {integrity: sha512-a7O53LxNik3nBzMsPwW17lRcMCCDRW1anZocFBgQRiyz0VIEf2MimOx4MsrGaLULhyGrc+cb2MqGscgNUIXUxQ==}
+  '@dgrammatiko/joomla-tools@0.0.410':
+    resolution: {integrity: sha512-vFcMNIc70DFAQcGNjFCO7qM+LkAJK/pLOel2G0Lo6Rz4gifFwfpzNXvo5UK5YVIDVlyE3pqoqvORW6S2N2BPWg==}
     hasBin: true
 
   '@emnapi/runtime@1.2.0':
@@ -1906,8 +1906,8 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
-  eslint-plugin-vue@9.29.1:
-    resolution: {integrity: sha512-MH/MbVae4HV/tM8gKAVWMPJbYgW04CK7SuzYRrlNERpxbO0P3+Zdsa2oAcFBW6xNu7W6lIkGOsFAMCRTYmrlWQ==}
+  eslint-plugin-vue@9.30.0:
+    resolution: {integrity: sha512-CyqlRgShvljFkOeYK8wN5frh/OGTvkj1S7wlr2Q2pUvwq+X5VYiLd6ZjujpgSgLnys2W8qrBLkXQ41SUYaoPIQ==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
@@ -4973,7 +4973,7 @@ snapshots:
     dependencies:
       postcss: 8.4.47
 
-  '@dgrammatiko/joomla-tools@0.0.409(@babel/core@7.25.2)(typescript@4.9.5)':
+  '@dgrammatiko/joomla-tools@0.0.410(@babel/core@7.25.2)(typescript@4.9.5)':
     dependencies:
       '@babel/plugin-transform-runtime': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-env': 7.26.0(@babel/core@7.25.2)
@@ -4991,7 +4991,7 @@ snapshots:
       eslint: 8.57.0
       eslint-config-airbnb-base: 15.0.0(eslint-plugin-import@2.31.0(eslint@8.57.0))(eslint@8.57.0)
       eslint-plugin-import: 2.31.0(eslint@8.57.0)
-      eslint-plugin-vue: 9.29.1(eslint@8.57.0)
+      eslint-plugin-vue: 9.30.0(eslint@8.57.0)
       fs-jetpack: 5.1.0
       postcss: 8.4.47
       postcss-cli: 11.0.0(postcss@8.4.47)
@@ -6074,7 +6074,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-vue@9.29.1(eslint@8.57.0):
+  eslint-plugin-vue@9.30.0(eslint@8.57.0):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
       eslint: 8.57.0
