@@ -25,8 +25,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       '@dgrammatiko/joomla-tools':
-        specifier: ^0.0.415
-        version: 0.0.415(@babel/core@7.25.2)(typescript@4.9.5)
+        specifier: ^0.0.417
+        version: 0.0.417(@babel/core@7.25.2)(typescript@4.9.5)
       '@rollup/plugin-node-resolve':
         specifier: 15.3.0
         version: 15.3.0(rollup@4.24.3)
@@ -866,8 +866,8 @@ packages:
     peerDependencies:
       postcss: ^8.4
 
-  '@dgrammatiko/joomla-tools@0.0.415':
-    resolution: {integrity: sha512-/EBpZH/5rlPhzHFOJ9/VIS8yJWhgQ351hKaJcLx463PJgBpufftzLXehS9JlWd18n/aBiYdYzJcFSL4tw+srRw==}
+  '@dgrammatiko/joomla-tools@0.0.417':
+    resolution: {integrity: sha512-6O+qs+G682LIPlZKzWMp5IkxLTdDozuWtK62/nqFoaBV02NOrLJJB4p+vAUwXVzwmEYnOK007DIjQSuTHp6EQQ==}
     hasBin: true
 
   '@emnapi/runtime@1.2.0':
@@ -4973,7 +4973,7 @@ snapshots:
     dependencies:
       postcss: 8.4.47
 
-  '@dgrammatiko/joomla-tools@0.0.415(@babel/core@7.25.2)(typescript@4.9.5)':
+  '@dgrammatiko/joomla-tools@0.0.417(@babel/core@7.25.2)(typescript@4.9.5)':
     dependencies:
       '@babel/plugin-transform-runtime': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-env': 7.26.0(@babel/core@7.25.2)
