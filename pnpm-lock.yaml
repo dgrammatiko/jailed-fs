@@ -25,8 +25,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       '@dgrammatiko/joomla-tools':
-        specifier: ^0.0.420
-        version: 0.0.420(@babel/core@7.25.2)(typescript@4.9.5)
+        specifier: ^0.0.421
+        version: 0.0.421(@babel/core@7.25.2)(typescript@4.9.5)
       '@rollup/plugin-node-resolve':
         specifier: 15.3.0
         version: 15.3.0(rollup@4.25.0)
@@ -866,8 +866,8 @@ packages:
     peerDependencies:
       postcss: ^8.4
 
-  '@dgrammatiko/joomla-tools@0.0.420':
-    resolution: {integrity: sha512-sHyGOnutJGAMQxUkgwfDBmi5ptzc6GdaZcj8Xns7dV6rDjwBz7AUez5ebRRjFI9rOUvCHWF0HDTNF4l/zL5rpQ==}
+  '@dgrammatiko/joomla-tools@0.0.421':
+    resolution: {integrity: sha512-F3lTqKed0laELm7S//ULT8BPiZN/sGuRguC61wjNk6RZ8UAu/1XeVAihb5jVd5pN69Xtu0DSsjGBJVe0rdfhtg==}
     hasBin: true
 
   '@emnapi/runtime@1.2.0':
@@ -2794,9 +2794,6 @@ packages:
     resolution: {integrity: sha512-5HviZNaZcfqP95rwpv+1HDgUamezbqdSYTyzjTvwtJSnIH+3vnbmWsItli8OFEndS984VT55M3jduxZbX351gg==}
     engines: {node: '>=12'}
 
-  picocolors@1.1.0:
-    resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
-
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -4058,7 +4055,7 @@ snapshots:
     dependencies:
       '@babel/helper-validator-identifier': 7.25.9
       js-tokens: 4.0.0
-      picocolors: 1.1.0
+      picocolors: 1.1.1
 
   '@babel/compat-data@7.26.0': {}
 
@@ -4976,7 +4973,7 @@ snapshots:
     dependencies:
       postcss: 8.4.48
 
-  '@dgrammatiko/joomla-tools@0.0.420(@babel/core@7.25.2)(typescript@4.9.5)':
+  '@dgrammatiko/joomla-tools@0.0.421(@babel/core@7.25.2)(typescript@4.9.5)':
     dependencies:
       '@babel/plugin-transform-runtime': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-env': 7.26.0(@babel/core@7.25.2)
@@ -5496,7 +5493,7 @@ snapshots:
       caniuse-lite: 1.0.30001666
       fraction.js: 4.3.7
       normalize-range: 0.1.2
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       postcss: 8.4.48
       postcss-value-parser: 4.2.0
 
@@ -6974,8 +6971,6 @@ snapshots:
 
   path-type@5.0.0: {}
 
-  picocolors@1.1.0: {}
-
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
@@ -7021,7 +7016,7 @@ snapshots:
       fs-extra: 11.2.0
       get-stdin: 9.0.0
       globby: 14.0.2
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       postcss: 8.4.48
       postcss-load-config: 5.1.0(postcss@8.4.48)
       postcss-reporter: 7.1.0(postcss@8.4.48)
@@ -7414,7 +7409,7 @@ snapshots:
 
   postcss-reporter@7.1.0(postcss@8.4.48):
     dependencies:
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       postcss: 8.4.48
       thenby: 1.3.4
 
@@ -7642,7 +7637,7 @@ snapshots:
   rtlcss@4.2.0:
     dependencies:
       escalade: 3.1.2
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       postcss: 8.4.48
       strip-json-comments: 3.1.1
 
@@ -7925,7 +7920,7 @@ snapshots:
       meow: 10.1.5
       micromatch: 4.0.8
       normalize-path: 3.0.0
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       postcss: 8.4.48
       postcss-resolve-nested-selector: 0.1.6
       postcss-safe-parser: 6.0.0(postcss@8.4.48)
@@ -7968,7 +7963,7 @@ snapshots:
       css-tree: 2.3.1
       css-what: 6.1.0
       csso: 5.0.5
-      picocolors: 1.1.0
+      picocolors: 1.1.1
 
   symlink-dir@6.0.1:
     dependencies:
@@ -8102,7 +8097,7 @@ snapshots:
     dependencies:
       browserslist: 4.24.0
       escalade: 3.1.2
-      picocolors: 1.1.0
+      picocolors: 1.1.1
 
   upper-case@1.1.3: {}
 
