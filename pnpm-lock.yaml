@@ -25,8 +25,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       '@dgrammatiko/joomla-tools':
-        specifier: ^0.0.437
-        version: 0.0.437(@babel/core@7.25.2)(typescript@4.9.5)
+        specifier: ^0.0.438
+        version: 0.0.438(@babel/core@7.25.2)(typescript@4.9.5)
       '@rollup/plugin-node-resolve':
         specifier: 15.3.0
         version: 15.3.0(rollup@4.28.0)
@@ -866,8 +866,8 @@ packages:
     peerDependencies:
       postcss: ^8.4
 
-  '@dgrammatiko/joomla-tools@0.0.437':
-    resolution: {integrity: sha512-f0KkmSi7Jydw7YWvGH5Fuwevz9bfieOveyrBbxOrknrhGp57xI+eXMZdP3CK8Os9UpTbVN9t7V5tJtUVvMaG3w==}
+  '@dgrammatiko/joomla-tools@0.0.438':
+    resolution: {integrity: sha512-nS8T9d8Pj97lrGDOmIGK7uyuaHjFpN9Q/kyU5jSoxkEyKtF5saIvsu/OQL6zBJzt4SCjYZrB1fALcQqWdukuew==}
     hasBin: true
 
   '@emnapi/runtime@1.2.0':
@@ -3680,6 +3680,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  terser@5.37.0:
+    resolution: {integrity: sha512-B8wRRkmre4ERucLM/uXx4MOV5cbnOlVAqUst+1+iLKPI0dOgFO28f84ptoQt9HEI537PMzfYa/d+GEPKTRXmYA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
@@ -4972,7 +4977,7 @@ snapshots:
     dependencies:
       postcss: 8.4.49
 
-  '@dgrammatiko/joomla-tools@0.0.437(@babel/core@7.25.2)(typescript@4.9.5)':
+  '@dgrammatiko/joomla-tools@0.0.438(@babel/core@7.25.2)(typescript@4.9.5)':
     dependencies:
       '@babel/plugin-transform-runtime': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-env': 7.26.0(@babel/core@7.25.2)
@@ -5013,7 +5018,7 @@ snapshots:
       stylelint-order: 6.0.4(stylelint@15.11.0(typescript@4.9.5))
       stylelint-scss: 5.3.2(stylelint@15.11.0(typescript@4.9.5))
       symlink-dir: 6.0.1
-      terser: 5.36.0
+      terser: 5.37.0
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/babel__core'
@@ -7983,6 +7988,13 @@ snapshots:
       strip-ansi: 6.0.1
 
   terser@5.36.0:
+    dependencies:
+      '@jridgewell/source-map': 0.3.6
+      acorn: 8.12.1
+      commander: 2.20.3
+      source-map-support: 0.5.21
+
+  terser@5.37.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
       acorn: 8.12.1
