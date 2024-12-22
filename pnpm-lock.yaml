@@ -25,8 +25,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       '@dgrammatiko/joomla-tools':
-        specifier: ^0.0.450
-        version: 0.0.450(@babel/core@7.25.2)(typescript@4.9.5)
+        specifier: ^0.0.451
+        version: 0.0.451(@babel/core@7.25.2)(typescript@4.9.5)
       '@rollup/plugin-node-resolve':
         specifier: 16.0.0
         version: 16.0.0(rollup@4.29.1)
@@ -866,8 +866,8 @@ packages:
     peerDependencies:
       postcss: ^8.4
 
-  '@dgrammatiko/joomla-tools@0.0.450':
-    resolution: {integrity: sha512-lKznXb4lJqNlLuNX1cWxgc/j/QMd/8LvmAPOdqc03jw1hCWaug92c9hUuWDc/tVNFVJS7wCceK7GppIr64FI7A==}
+  '@dgrammatiko/joomla-tools@0.0.451':
+    resolution: {integrity: sha512-03AGo+UZ/pRvYEFbyLntF4KzrkZThMo8kWWrYjmNnzDkMh3/cLhuTVMR2hEWeY8B1RUWjdFGbWAMXamq27kfJg==}
     hasBin: true
 
   '@emnapi/runtime@1.2.0':
@@ -1086,15 +1086,6 @@ packages:
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-
-  '@rollup/plugin-node-resolve@15.3.1':
-    resolution: {integrity: sha512-tgg6b91pAybXHJQMAAwW9VuWBO6Thi+q7BCNARLwSqlmsHz0XYURtGvh/AuwSADXSI4h/2uHbs7s4FzlZDGSGA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^2.78.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -4991,14 +4982,14 @@ snapshots:
     dependencies:
       postcss: 8.4.49
 
-  '@dgrammatiko/joomla-tools@0.0.450(@babel/core@7.25.2)(typescript@4.9.5)':
+  '@dgrammatiko/joomla-tools@0.0.451(@babel/core@7.25.2)(typescript@4.9.5)':
     dependencies:
       '@babel/plugin-transform-runtime': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-env': 7.26.0(@babel/core@7.25.2)
       '@rollup/plugin-babel': 6.0.4(@babel/core@7.25.2)(rollup@4.29.1)
       '@rollup/plugin-commonjs': 28.0.0(rollup@4.29.1)
       '@rollup/plugin-json': 6.1.0(rollup@4.29.1)
-      '@rollup/plugin-node-resolve': 15.3.1(rollup@4.29.1)
+      '@rollup/plugin-node-resolve': 16.0.0(rollup@4.29.1)
       '@rollup/plugin-replace': 6.0.1(rollup@4.29.1)
       '@rollup/plugin-terser': 0.4.4(rollup@4.29.1)
       adm-zip: 0.5.15
@@ -5241,16 +5232,6 @@ snapshots:
   '@rollup/plugin-json@6.1.0(rollup@4.29.1)':
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.29.1)
-    optionalDependencies:
-      rollup: 4.29.1
-
-  '@rollup/plugin-node-resolve@15.3.1(rollup@4.29.1)':
-    dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.29.1)
-      '@types/resolve': 1.20.2
-      deepmerge: 4.3.1
-      is-module: 1.0.0
-      resolve: 1.22.8
     optionalDependencies:
       rollup: 4.29.1
 
