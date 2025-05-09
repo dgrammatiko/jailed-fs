@@ -31,7 +31,7 @@
     "@11ty/eleventy": "3.0.0",
     "@11ty/eleventy-img": "6.0.3",
     "@11ty/eleventy-navigation": "1.0.4",
-    "@11ty/eleventy-plugin-syntaxhighlight": "5.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "5.0.1",
     "@dgrammatiko/joomla-tools": "^0.0.520",
     "@rollup/plugin-node-resolve": "16.0.1",
     "@rollup/plugin-terser": "^0.4.0",
