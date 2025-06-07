@@ -38,7 +38,7 @@
     "markdown-it-anchor": "9.2.0",
     "naf-css": "3.0.3",
     "postcss-import": "^16.0.0",
-    "rollup-plugin-html-literals": "^1.1.6",
+    "rollup-plugin-html-literals": "^2.0.0",
     "semver": "7.7.2"
   },
   "joomla-extensions": {
