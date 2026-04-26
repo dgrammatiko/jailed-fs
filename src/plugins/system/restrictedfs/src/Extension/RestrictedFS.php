@@ -48,34 +48,54 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
   public static function getSubscribedEvents(): array
   {
     return [
-      'onAfterRoute'        => 'afterRoute',
-      'onBeforeCompileHead' => 'beforeCompileHead',
-      'onSetupProviders'    => 'setupProviders',
+      'onAfterRoute'        => 'onAfterRoute',
+      'onBeforeCompileHead' => 'onBeforeCompileHead',
+      'onSetupProviders'    => 'onSetupProviders',
     ];
   }
 
   /**
    * @return  void
    */
-  public function afterRoute(): void
+  public function onSetupProviders(MediaProviderEvent $event): void
   {
+    // Register our provider
+    $event->getProviderManager()->registerProvider($this);
+  }
+
+  /**
+   * @return  void
+   */
+  public function onAfterRoute(): void
+  {
+    $app = $this->getApplication();
     // Bail out early
-    if ($this->getApplication()->input->get('option') !== 'com_media') return;
+    if (!$app || $app->input->get('option') !== 'com_media') return;
     $PluginUserGroups = (array) $this->params->get('jail_usergroups', []);
-    $userGroups       = $this->getApplication()->getIdentity()->groups;
+    $userGroups       = $app->getIdentity()->groups;
+    if (count(array_intersect($userGroups, $PluginUserGroups)) === 0) return;
 
-    if (count(array_intersect($userGroups, $PluginUserGroups)) === 0) $this->jail = false;
-    if (!$this->jail) return;
-
-    // Disable all the filesystem adapters except this one
-    $original = (new \ReflectionClass('\Joomla\CMS\Plugin\PluginHelper'))->getProperty('plugins');
-    $original->setAccessible(true);
-    $original->setValue(null, array_filter(
-      $original->getValue(),
-      function ($plugin) {
-        if (isset($plugin->type) && $plugin->type !== 'filesystem') return false;
+    // Remove local filesystem from PluginHelper's loaded plugins
+    try {
+      $pluginsProp = new \ReflectionProperty(\Joomla\CMS\Plugin\PluginHelper::class, 'plugins');
+      $plugins = $pluginsProp->getValue();
+      $filtered = [];
+      foreach ($plugins as $p) {
+        if ($p->type === 'filesystem' && $p->name === 'local') {
+          continue;
+        }
+        $filtered[] = $p;
       }
-    ));
+      $pluginsProp->setValue(null, array_values($filtered));
+    } catch (\Throwable $e) {
+      // Ignore reflection errors
+    }
+
+    // Import the plugin to trigger onSetupProviders
+    \Joomla\CMS\Plugin\PluginHelper::importPlugin('system', 'restrictedfs');
+
+    // Import filesystem - the plugin will now register itself
+    \Joomla\CMS\Plugin\PluginHelper::importPlugin('filesystem');
   }
 
   /**
@@ -83,7 +103,7 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
    *
    * @return  void
    */
-  public function beforeCompileHead(): void
+  public function onBeforeCompileHead(): void
   {
     $app = $this->getApplication();
     $doc = $app->getDocument();
@@ -121,22 +141,11 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
   }
 
   /**
-   * Setup Providers for Jailed Adapter
-   */
-  public function setupProviders(MediaProviderEvent $event): void
-  {
-    // Don't register this provider if we're not jailed
-    if ($this->jail) {
-      $event->getProviderManager()->registerProvider($this);
-    }
-  }
-
-  /**
    * Returns the ID of the provider
    */
   public function getID(): string
   {
-    return $this->_name;
+    return 'restrictedfs';
   }
 
   /**
@@ -152,21 +161,26 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
    *
    * @return  \Joomla\Component\Media\Administrator\Adapter\AdapterInterface[]
    */
-  public function getAdapters()
+  public function getAdapters(): array
   {
-    $user          = $this->getApplication()->getIdentity();
-    $storagePath   = $this->params->get('storage_path', 'images');
-    if ($this->masked) {
-      $userName = md5($user->username);
-    } else {
-      $userName = urlencode(str_replace(['@', '.', '\\', '/', '*', '?', '<', '>'], ['_', '-', '_', '_', '_', '_', '_', '_'], $user->username));
-    }
+    $app = $this->getApplication();
+    if (!$app) return [];
+
+    $user = $app->getIdentity();
+    $storagePath = $this->params->get('storage_path', 'images');
+    $userName = $this->masked
+      ? md5($user->username)
+      : urlencode(str_replace(['@', '.', '\\', '/', '*', '?', '<', '>'], ['_', '-', '_', '_', '_', '_', '_', '_'], $user->username));
 
     $directoryPath = JPATH_ROOT . '/' . $storagePath . '/users/' . $userName;
-
     if (!is_dir($directoryPath)) mkdir($directoryPath, 0755, true);
 
-    $adapter = new \Dgrammatiko\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter($directoryPath . '/', $userName, $storagePath, $this->params->get('thumbs', false));
+    $adapter = new \Dgrammatiko\Plugin\System\RestrictedFS\Adapter\RestrictedFSAdapter(
+      $directoryPath . '/',
+      $userName,
+      $storagePath,
+      (bool) $this->params->get('thumbs', false)
+    );
 
     return [$adapter->getAdapterName() => $adapter];
   }
