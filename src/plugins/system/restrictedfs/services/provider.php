@@ -21,11 +21,10 @@ return new class implements ServiceProviderInterface
       PluginInterface::class,
       function (Container $container)
       {
-        $plugin                 = PluginHelper::getPlugin('system', 'restrictedfs');
-        $dispatcher             = $container->get(DispatcherInterface::class);
-        $documentFactory        = $container->get('document.factory');
+        $dispatcher = $container->get(DispatcherInterface::class);
+        $pluginData = (array) PluginHelper::getPlugin('system', 'restrictedfs');
 
-        $plugin = new RestrictedFS($dispatcher, (array) $plugin, $documentFactory);
+        $plugin = new RestrictedFS($dispatcher, $pluginData);
         $plugin->setApplication(Factory::getApplication());
 
         return $plugin;
