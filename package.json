@@ -35,7 +35,7 @@
     "@dgrammatiko/joomla-tools": "^0.0.626",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
-    "markdown-it-anchor": "9.2.0",
+    "markdown-it-anchor": "9.2.1",
     "naf-css": "3.0.3",
     "postcss-import": "^16.0.0",
     "rollup-plugin-html-literals": "^2.0.0",
