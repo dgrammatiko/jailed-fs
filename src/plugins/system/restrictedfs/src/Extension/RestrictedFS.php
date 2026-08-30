@@ -122,12 +122,9 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
     if (!is_array($options) || count($options) === 0 || !isset($options['default'])) return;
 
     $user = $this->getApplication()->getIdentity();
-    $username = function_exists('transliterator_transliterate') ? transliterator_transliterate('Any-Latin; Latin-ASCII;', $user->username) : $user->username;
-    if ($this->masked) {
-      $userName = md5($username);
-    } else {
-      $userName = urlencode(str_replace(['@', '.', '\\', '/', '*', '?', '<', '>'], ['_', '-', '_', '_', '_', '_', '_', '_'], $username));
-    }
+    $username = $this->sanitizeUsername($user->username, $user->id);
+    $userName = $this->masked ? md5($username) : $username;
+
     $tinyMCE = (object) ['tinyMCE' => ['default' => $options['default']]];
     if (isset($options['default']['comMediaAdapter'])) {
       $options['default']['comMediaAdapter'] = 'restrictedfs-' . $userName . ':';
@@ -171,10 +168,8 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
     $user = $app->getIdentity();
     $storagePath   = $this->params->get('storage_path', 'images');
     $storageFolder = $this->params->get('storage_folder', 'users');
-    $username = function_exists('transliterator_transliterate') ? transliterator_transliterate('Any-Latin; Latin-ASCII;', $user->username) : $user->username;
-    $userName = $this->masked
-      ? md5($username)
-      : urlencode(str_replace(['@', '.', '\\', '/', '*', '?', '<', '>'], ['_', '-', '_', '_', '_', '_', '_', '_'], $username));
+    $username = $this->sanitizeUsername($user->username, $user->id);
+    $userName = $this->masked ? md5($username) : $username;
 
     $directoryPath = JPATH_ROOT . '/' . $storagePath . '/' . $storageFolder . '/'. $userName;
     if (!is_dir($directoryPath)) mkdir($directoryPath, 0755, true);
@@ -187,5 +182,34 @@ final class RestrictedFS extends CMSPlugin implements ProviderInterface, Subscri
     );
 
     return [$adapter->getAdapterName() => $adapter];
+  }
+
+  /**
+   * Sanitize a username so it only contains a-z, A-Z, 0-9, ., -, _
+   * Safe to use as a folder name / media adapter identifier.
+   *
+   * If sanitizing strips the username down to nothing (e.g. it only
+   * contained disallowed characters), fall back to the user's unique
+   * Joomla ID, to avoid collisions between different users.
+   *
+   * @param   string   $username  The raw username
+   * @param   integer  $id        The user's Joomla ID, used as a fallback
+   *
+   * @return  string
+   */
+  private function sanitizeUsername(string $username, int $id = 0): string
+  {
+    // Transliterate accented / non-latin characters when possible
+    if (function_exists('transliterator_transliterate')) {
+      $username = transliterator_transliterate('Any-Latin; Latin-ASCII;', $username);
+    }
+
+    // Replace anything that is not in the allowed set with an underscore
+    $username = preg_replace('/[^a-zA-Z0-9._-]+/', '_', $username);
+
+    // Collapse repeated underscores and trim separators from both ends
+    $username = trim(preg_replace('/_+/', '_', $username), '.');
+
+    return $username !== '' ? $username : 'user_' . $id;
   }
 }
