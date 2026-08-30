@@ -1,6 +1,6 @@
 {
   "name": "plugin-restricted-fs",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "private": true,
   "description": "A tiny Joomla 4.0+ plugin that jails the filesystem to a restricted directory",
   "scripts": {
@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://dgrammatiko@github.com/ttc-freebies/plugin-responsive-images.git"
+    "url": "git+https://dgrammatiko@github.com/dgrammatiko/plugin-restricted-fs.git"
   },
   "author": "Dimitris Grammatikogiannis",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/ttc-freebies/plugin-responsive-images/issues"
+    "url": "https://github.com/dgrammatiko/plugin-restricted-fs/issues"
   },
-  "homepage": "https://github.com/ttc-freebies/plugin-responsive-images#readme",
+  "homepage": "https://github.com/dgrammatiko/plugin-restricted-fs#readme",
   "devDependencies": {
     "@11ty/eleventy": "3.1.6",
     "@11ty/eleventy-img": "7.0.0",
@@ -70,7 +70,7 @@
       "system": [
         {
           "name": "restrictedfs",
-          "version": "1.5.1"
+          "version": "1.5.2"
         }
       ],
       "task": [],
