@@ -32,7 +32,7 @@
     "@11ty/eleventy-img": "7.1.1",
     "@11ty/eleventy-navigation": "1.0.5",
     "@11ty/eleventy-plugin-syntaxhighlight": "5.0.2",
-    "@dgrammatiko/joomla-tools": "^0.0.626",
+    "@dgrammatiko/joomla-tools": "^0.1.0",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "markdown-it-anchor": "10.1.0",
