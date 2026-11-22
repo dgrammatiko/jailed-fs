@@ -4,7 +4,7 @@
   "private": true,
   "description": "A tiny Joomla 4.0+ plugin that jails the filesystem to a restricted directory",
   "scripts": {
-    "get-joomla": "node joomla-tools.mjs -i",
+    "get-joomla": "joomla-tools.mjs -i",
     "link": "joomla-tools -l",
     "build": "joomla-tools -b media_source",
     "release": "joomla-tools -r",
